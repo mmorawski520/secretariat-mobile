@@ -2,4 +2,14 @@
     <string name="app_name">secretary-mobile</string>
     <string name="btn_upload_label">upload</string>
     <string name="btn_filters_label">filters</string>
+    <string name="btn_submit_label">submit</string>
+    <string name="btn_return_label">return</string>
+    <string name="edittext_name_label">name</string>
+    <string name="textview_upload_file_label">file url</string>
+    <string name="textview_table_selection_label">select table</string>
+    <string name="textview_table_search_label">search</string>
+    <string name="textview_table_order_by_label">order by</string>
+    <string name="employees">employees</string>
+    <string name="teachers">teachers</string>
+    <string name="students">students</string>
 </resources>

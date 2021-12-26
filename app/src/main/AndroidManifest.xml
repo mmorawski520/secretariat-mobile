@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Secretarymobile">
         <activity
+            android:name=".FiltersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UploadActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
