@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">secretary-mobile</string>
+    <string name="btn_upload_label">upload</string>
+    <string name="btn_filters_label">filters</string>
+</resources>
