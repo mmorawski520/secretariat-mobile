@@ -14,29 +14,29 @@
         android:id="@+id/btnSubmit"
         android:layout_width="169dp"
         android:layout_height="48dp"
-        android:text="@string/btn_return_label"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        app:layout_constraintVertical_bias="0.661" />
-
-    <Button
-        android:id="@+id/btnMainView"
-        android:layout_width="169dp"
-        android:layout_height="48dp"
         android:text="@string/btn_upload_label"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.322" />
+
+        app:layout_constraintVertical_bias="0.332" />
+
+    <Button
+        android:id="@+id/btnMain"
+        android:layout_width="169dp"
+        android:layout_height="48dp"
+        android:text="@string/btn_return_label"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.661" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/editTextPersonName"
         android:layout_width="319dp"
         android:layout_height="79dp"
         android:ems="10"

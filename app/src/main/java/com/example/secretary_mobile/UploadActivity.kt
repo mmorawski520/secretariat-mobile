@@ -22,6 +22,7 @@ class UploadActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upload)
+
         val db = DBHelper(this, null)
         val actionBar = supportActionBar
         actionBar!!.hide()
@@ -51,58 +52,63 @@ class UploadActivity : AppCompatActivity() {
                 }
             }
         }
-        var downloadId: Long = 0
-        binding.btnMainView.setOnClickListener{
+
+        binding.btnMain.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-
-
         }
-        binding.btnSubmit.setOnClickListener{
-            val request = DownloadManager.Request(Uri.parse(binding.editTextTextPersonName.text.toString()))
-                .setTitle("data")
-                .setDescription("Downloading data...")
-                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                .setAllowedOverMetered(true)
-                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,"dbData.txt")
+        binding.btnSubmit.setOnClickListener {
+            val request =
+                DownloadManager.Request(Uri.parse(binding.editTextPersonName.text.toString()))
+                    .setTitle("data")
+                    .setDescription("Downloading data...")
+                    .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                    .setAllowedOverMetered(true)
+                    .setDestinationInExternalPublicDir(
+                        Environment.DIRECTORY_DOWNLOADS,
+                        "dbData.txt"
+                    )
 
             val dm = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
             dm.enqueue(request)
             var columnCounter = 0
-            val externalFile = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) , "dbData.txt")
+            val externalFile = File(
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+                "dbData.txt"
+            )
 
-            if(externalFile.exists()) {
+            if (externalFile.exists()) {
                 val text = externalFile.readText()
                 val lines: List<String> = text.split(System.getProperty("line.separator"))
 
                 for (line in lines) {
-                    for(c:Char in line){
-                        if(c=='|')
+                    for (c: Char in line) {
+                        if (c == '|')
                             columnCounter++
                     }
-                    if (columnCounter == 12)
-                    {
+                    if (columnCounter == 12) {
                         var collumns: List<String> = text.split("|")
                         db.addStudent(collumns)
 
                     }
-                    if (columnCounter == 13)
-                    {
+                    if (columnCounter == 13) {
                         var collumns: List<String> = text.split("|")
                         db.addStudent(collumns)
 
                     }
-                    if (columnCounter == 14)
-                    {
+                    if (columnCounter == 14) {
                         var collumns: List<String> = text.split("|")
                         db.addStudent(collumns)
                     }
-                    Toast.makeText(this,"Data has been uploaded", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Data has been uploaded", Toast.LENGTH_SHORT).show()
                 }
 
-            }
-            else{
-                Toast.makeText(this,"Something wrong, probably your file doesn't exist :c", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(
+                    this,
+                    "Something wrong, probably your file doesn't exist :c",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
