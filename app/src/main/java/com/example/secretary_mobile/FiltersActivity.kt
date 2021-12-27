@@ -38,7 +38,8 @@ class FiltersActivity : AppCompatActivity() {
         val spinnerOrderByField = findViewById<Spinner>(R.id.spinnerOrderByField)
         val spinnerSearchField = findViewById<Spinner>(R.id.spinnerSearchField)
         val editTextField = findViewById<EditText>(R.id.editTextSearch)
-
+        val actionBar = supportActionBar
+        actionBar!!.hide()
         //Adapters
         var adapterOrderByAscDesc =
             ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayOrderByAscDesc)

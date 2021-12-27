@@ -1,6 +1,7 @@
 package com.example.secretary_mobile
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,7 +18,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val actionBar = supportActionBar
+
         actionBar!!.hide()
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
         var binding = ActivityMainBinding.inflate(getLayoutInflater());
         var view = binding.getRoot();
         setContentView(view)
