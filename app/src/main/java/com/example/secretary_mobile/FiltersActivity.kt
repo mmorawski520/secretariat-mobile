@@ -1,15 +1,24 @@
 package com.example.secretary_mobile
 
+import android.app.DatePickerDialog
+import android.app.ProgressDialog.show
+import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.annotation.RequiresApi
 import com.example.secretary_mobile.databinding.ActivityFiltersBinding
+import com.example.secretary_mobile.databinding.ActivityMainBinding
+import java.util.*
 
-class FiltersActivity : AppCompatActivity() {
+class FiltersActivity : AppCompatActivity(){
+
     var curTable = "students";
     var arrayOrderByAscDesc = arrayOf<String>("ASC", "DESC")
     var arrayOfFields = arrayOf<String>(
@@ -27,12 +36,19 @@ class FiltersActivity : AppCompatActivity() {
         "current_class",
         "groups"
     )
+    var youngerThan: String? = ""
+    var olderThan: String? = ""
     var select: String = ""
+    lateinit var btnDataYoungerPicker: Button
+    lateinit var btnDataOlderPicker: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_filters)
+        var binding = ActivityFiltersBinding.inflate(getLayoutInflater());
         val btnSearch = findViewById<Button>(R.id.btnSearch)
+        btnDataYoungerPicker = findViewById<Button>(R.id.btnPickYoungerDate)
+        btnDataOlderPicker = findViewById<Button>(R.id.btnPickOlderDate)
         val radioGroup = findViewById<RadioGroup>(R.id.radioGroup)
         val spinnerOrderByAscDesc = findViewById<Spinner>(R.id.spinnerOrderByAscDesc)
         val spinnerOrderByField = findViewById<Spinner>(R.id.spinnerOrderByField)
@@ -40,6 +56,14 @@ class FiltersActivity : AppCompatActivity() {
         val editTextField = findViewById<EditText>(R.id.editTextSearch)
         val actionBar = supportActionBar
         actionBar!!.hide()
+        btnDataYoungerPicker.setOnClickListener{
+            clickDataPickerYoungerThan( binding.getRoot())
+          /* btnDataYoungerPicker.text=youngerThan*/
+        }
+        btnDataOlderPicker.setOnClickListener{
+            clickDataPickerOlderThan( binding.getRoot())
+          //  btnDataOlderPicker.text=olderThan
+        }
         //Adapters
         var adapterOrderByAscDesc =
             ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayOrderByAscDesc)
@@ -50,6 +74,7 @@ class FiltersActivity : AppCompatActivity() {
         spinnerOrderByAscDesc.adapter = adapterOrderByAscDesc
         spinnerOrderByField.adapter = adapterArrayOfFields
         spinnerSearchField.adapter = adapterArrayOfFields
+
 
         radioGroup.setOnCheckedChangeListener(
             RadioGroup.OnCheckedChangeListener { group, checkedId ->
@@ -67,6 +92,7 @@ class FiltersActivity : AppCompatActivity() {
                     curTable = "teachers"
                 }
             })
+
 
         btnSearch.setOnClickListener {
             if (editTextField.text.toString().trim().isNotEmpty()) {
@@ -98,5 +124,34 @@ class FiltersActivity : AppCompatActivity() {
             intent.putExtra("dbData", select)
             startActivity(intent)
         }
+    }
+    @RequiresApi(Build.VERSION_CODES.N)
+     fun clickDataPickerYoungerThan(view: View) {
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+
+
+        val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            youngerThan="$dayOfMonth.${monthOfYear+1}.$year 00:00:00"
+            Toast.makeText(this,"Selected date $dayOfMonth.${monthOfYear+1}.$year", Toast.LENGTH_SHORT).show()
+            btnDataYoungerPicker.text="$dayOfMonth.${monthOfYear+1}.$year"
+        }, year, month, day)
+        dpd.show()
+    }
+    fun clickDataPickerOlderThan(view: View) {
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+
+
+        val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            olderThan="$dayOfMonth.${monthOfYear+1}.$year 00:00:00"
+            Toast.makeText(this,"Selected date $dayOfMonth.${monthOfYear+1}.$year", Toast.LENGTH_SHORT).show()
+            btnDataOlderPicker.text="$dayOfMonth.${monthOfYear+1}.$year"
+        }, year, month, day)
+        dpd.show()
     }
 }

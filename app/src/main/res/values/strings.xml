@@ -11,5 +11,9 @@
     <string name="textview_table_order_by_label">order by</string>
     <string name="employees">employees</string>
     <string name="teachers">teachers</string>
+    <string name="younger">younger than : </string>
+    <string name="older">older than : </string>
     <string name="students">students</string>
+    <string name="click_me">click me</string>
+    <string name="pick_date">Pick Date</string>
 </resources>
