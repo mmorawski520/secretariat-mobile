@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.secretary_mobile.databinding.ActivityMainBinding
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         } catch (e: Throwable) {
             Cursor = db.basicCustomSelect("SELECT * FROM students")
             binding.recyclerView.adapter = getStudents(Cursor)
+           
         }
         //Btn binding
         binding.btnUpload.setOnClickListener {

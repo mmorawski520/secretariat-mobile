@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">secretary-mobile</string>
-    <string name="btn_upload_label">upload</string>
+    <string name="btn_upload_label">import</string>
     <string name="btn_filters_label">filters</string>
     <string name="btn_submit_label">submit</string>
     <string name="btn_return_label">return</string>
-    <string name="edittext_name_label">http://file123.freetzi.com/copy.txt</string>
+    <string name="edittext_name_label">https://raw.githubusercontent.com/mmorawski520/secretariat/master/exportedData.txt</string>
     <string name="textview_upload_file_label">file url</string>
     <string name="textview_table_selection_label">select table</string>
     <string name="textview_table_search_label">search</string>

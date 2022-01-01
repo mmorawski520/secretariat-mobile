@@ -72,6 +72,8 @@ class UploadActivity : AppCompatActivity() {
             val dm = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
             dm.enqueue(request)
             var columnCounter = 0
+            var inserts =0
+            var loops =0
             val externalFile = File(
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
                 "dbData.txt"
@@ -79,30 +81,34 @@ class UploadActivity : AppCompatActivity() {
 
             if (externalFile.exists()) {
                 val text = externalFile.readText()
-                val lines: List<String> = text.split(System.getProperty("line.separator"))
+
+                val lines: List<String> = text.split("\n")
 
                 for (line in lines) {
                     for (c: Char in line) {
-                        if (c == '|')
+                        if (c == ',')
                             columnCounter++
                     }
                     if (columnCounter == 12) {
-                        var collumns: List<String> = text.split("|")
+                        var collumns: List<String> = line.split(",")
                         db.addStudent(collumns)
-
+                        inserts++
                     }
                     if (columnCounter == 13) {
-                        var collumns: List<String> = text.split("|")
-                        db.addStudent(collumns)
-
+                        var collumns: List<String> = line.split(",")
+                        db.addTeacher(collumns)
+                        inserts++
                     }
                     if (columnCounter == 14) {
-                        var collumns: List<String> = text.split("|")
-                        db.addStudent(collumns)
+                        var collumns: List<String> = line.split(",")
+                        db.addEmployee(collumns)
+                        inserts++
                     }
-                    Toast.makeText(this, "Data has been uploaded", Toast.LENGTH_SHORT).show()
-                }
+                    columnCounter=0
+                    loops++
 
+                }
+                Toast.makeText(this, "Data has been uploaded l"+loops+" i "+inserts, Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(
                     this,

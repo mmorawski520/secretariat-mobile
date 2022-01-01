@@ -42,7 +42,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         db.insert("students", null, values)
     }
 
-    fun addTeachers(collumns: List<String>) {
+    fun addTeacher(collumns: List<String>) {
         val values = ContentValues()
         val db = this.writableDatabase
 

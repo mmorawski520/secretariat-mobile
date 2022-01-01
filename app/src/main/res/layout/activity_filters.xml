@@ -16,39 +16,42 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingLeft="8dp"
-        android:paddingTop="4dp"
+        android:paddingTop="15dp"
         android:paddingRight="8dp"
         android:paddingBottom="4dp">
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="188dp"
-            android:layout_height="43dp"
+            android:layout_height="wrap_content"
             android:text="@string/textview_table_selection_label"
             android:textColor="#FFFFFF" />
 
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="721dp"
-            android:layout_height="147dp">
+            android:layout_height="wrap_content"
+            android:orientation='horizontal'
+            >
+
 
             <RadioButton
                 android:id="@+id/radioButtonTeachers"
-                android:layout_width="128dp"
+
+                android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:text="@string/employees"
                 android:textColor="#FFFFFF" />
 
             <RadioButton
-                android:id="@+id/radioButtonEmployees"
-                android:layout_width="130dp"
+                android:id="@+id/radioButtonEmployees"   android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:text="@string/teachers"
                 android:textColor="#FFFFFF" />
 
             <RadioButton
                 android:id="@+id/radioButtonStudents"
-                android:layout_width="131dp"
+                android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:checked="true"
                 android:text="@string/students"
@@ -114,14 +117,14 @@
                 android:layout_height="48dp"
                 android:background="#FFFFFF"
                 tools:ignore="SpeakableTextPresentCheck" />
-        </LinearLayout>
 
-        <Button
-            android:id="@+id/btnSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/textview_table_search_label"
-            tools:ignore="DuplicateSpeakableTextCheck" />
+            <Button
+                android:id="@+id/btnSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/textview_table_search_label"
+                tools:ignore="DuplicateSpeakableTextCheck" />
+        </LinearLayout>
 
     </LinearLayout>
 

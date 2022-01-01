@@ -4,19 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UploadActivity"
-    android:screenOrientation="landscape"
     android:background="#232931"
+    android:screenOrientation="landscape"
     android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen"
-    >
+    tools:context=".UploadActivity">
 
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
+
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" >
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
@@ -27,48 +31,58 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.113"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginHorizontal="15dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.134" />
+            app:layout_constraintVertical_bias="0.134"/>
 
         <EditText
             android:id="@+id/editTextPersonName"
-            android:layout_width="319dp"
+            android:layout_width="match_parent"
             android:layout_height="79dp"
-            android:autofillHints=""
             android:ems="10"
             android:inputType="textPersonName"
+            android:layout_marginHorizontal="15dp"
             android:text="@string/edittext_name_label"
             android:textColor="#FFFFFF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.437"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.186" />
+            android:importantForAutofill="no" />
 
-        <Button
-            android:id="@+id/btnSubmit"
-            android:layout_width="169dp"
-            android:layout_height="48dp"
-            android:text="@string/btn_upload_label"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-            app:layout_constraintVertical_bias="0.332" />
+            <Button
+                android:id="@+id/btnMain"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="169dp"
+                android:layout_height="48dp"
+                android:background="#A366DF"
+                android:layout_marginHorizontal="15dp"
+                android:text="@string/btn_return_label"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.661" />
 
-        <Button
-            android:id="@+id/btnMain"
-            android:layout_width="169dp"
-            android:layout_height="48dp"
-            android:text="@string/btn_return_label"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.661" />
+            <Button
+                android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="15dp"
+                android:layout_height="48dp"
+                android:text="@string/btn_upload_label"
+                android:background="#A366DF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                app:layout_constraintVertical_bias="0.332"
+                style="?android:attr/buttonBarButtonStyle" />
+        </LinearLayout>
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
