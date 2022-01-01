@@ -17,4 +17,6 @@
     <string name="click_me">click me</string>
     <string name="pick_date">Pick Date</string>
     <string name="change_date">Change Date</string>
+    <string name="todo">TODO</string>
+    <string name="todo2">TODO2</string>
 </resources>

@@ -45,7 +45,7 @@ class FiltersActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_filters)
-        actionBar!!.hide()
+
 
         var binding = ActivityFiltersBinding.inflate(getLayoutInflater());
         val btnSearch = findViewById<Button>(R.id.btnSearch)
@@ -56,6 +56,7 @@ class FiltersActivity : AppCompatActivity() {
         val editTextField = findViewById<EditText>(R.id.editTextSearch)
         val actionBar = supportActionBar
 
+        actionBar!!.hide()
         btnDataYoungerPicker = findViewById<Button>(R.id.btnPickYoungerDate)
         btnDataOlderPicker = findViewById<Button>(R.id.btnPickOlderDate)
 
