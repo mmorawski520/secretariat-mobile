@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         try {
             select = intent.getStringExtra("dbData")
-            Toast.makeText(this,select, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, select, Toast.LENGTH_SHORT).show()
             Cursor = db.basicCustomSelect(select.toString())
             if (Cursor.getColumnIndex("groups") != -1) {
                 binding.recyclerView.adapter = getStudents(Cursor)
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         } catch (e: Throwable) {
             Cursor = db.basicCustomSelect("SELECT * FROM students")
             binding.recyclerView.adapter = getStudents(Cursor)
-           
+
         }
         //Btn binding
         binding.btnUpload.setOnClickListener {

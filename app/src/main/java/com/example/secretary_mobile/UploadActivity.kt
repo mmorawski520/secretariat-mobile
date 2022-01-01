@@ -2,14 +2,13 @@ package com.example.secretary_mobile
 
 import android.Manifest
 import android.app.DownloadManager
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
+import android.os.*
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.os.Environment
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -23,7 +22,7 @@ class UploadActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upload)
 
-        val db = DBHelper(this, null)
+
         val actionBar = supportActionBar
         actionBar!!.hide()
 
@@ -69,53 +68,60 @@ class UploadActivity : AppCompatActivity() {
                         "dbData.txt"
                     )
 
+            Toast.makeText(this, "File is being downlaoded ", Toast.LENGTH_SHORT).show()
             val dm = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
             dm.enqueue(request)
-            var columnCounter = 0
-            var inserts =0
-            var loops =0
-            val externalFile = File(
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-                "dbData.txt"
-            )
+            //1 second delay
+            val handler = Handler(Looper.getMainLooper())
+            handler.postDelayed({
+                loadData()
+            }, 1000)
+        }
 
-            if (externalFile.exists()) {
-                val text = externalFile.readText()
+    }
+    fun loadData(){
+        var columnCounter = 0
+        val externalFile = File(
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+            "dbData.txt"
+        )
 
-                val lines: List<String> = text.split("\n")
+        val db = DBHelper(this, null)
+        if (externalFile.exists()) {
+            val text = externalFile.readText()
 
-                for (line in lines) {
-                    for (c: Char in line) {
-                        if (c == ',')
-                            columnCounter++
-                    }
-                    if (columnCounter == 12) {
-                        var collumns: List<String> = line.split(",")
-                        db.addStudent(collumns)
-                        inserts++
-                    }
-                    if (columnCounter == 13) {
-                        var collumns: List<String> = line.split(",")
-                        db.addTeacher(collumns)
-                        inserts++
-                    }
-                    if (columnCounter == 14) {
-                        var collumns: List<String> = line.split(",")
-                        db.addEmployee(collumns)
-                        inserts++
-                    }
-                    columnCounter=0
-                    loops++
+            val lines: List<String> = text.split("\n")
+
+            for (line in lines) {
+                for (c: Char in line) {
+                    if (c == ',')
+                        columnCounter++
+                }
+                if (columnCounter == 12) {
+                    var collumns: List<String> = line.split(",")
+                    db.addStudent(collumns)
 
                 }
-                Toast.makeText(this, "Data has been uploaded l"+loops+" i "+inserts, Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(
-                    this,
-                    "Something wrong, probably your file doesn't exist :c",
-                    Toast.LENGTH_SHORT
-                ).show()
+                if (columnCounter == 13) {
+                    var collumns: List<String> = line.split(",")
+                    db.addTeacher(collumns)
+
+                }
+                if (columnCounter == 14) {
+                    var collumns: List<String> = line.split(",")
+                    db.addEmployee(collumns)
+
+                }
+                columnCounter = 0
+
             }
+            Toast.makeText(this, "Data has been uploaded", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(
+                this,
+                "Something wrong, probably your file doesn't exist :c",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }

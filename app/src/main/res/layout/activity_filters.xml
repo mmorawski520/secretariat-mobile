@@ -10,7 +10,6 @@
     android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen"
     tools:context=".UploadActivity">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,20 +30,18 @@
             android:id="@+id/radioGroup"
             android:layout_width="721dp"
             android:layout_height="wrap_content"
-            android:orientation='horizontal'
-            >
-
+            android:orientation='horizontal'>
 
             <RadioButton
                 android:id="@+id/radioButtonTeachers"
-
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:text="@string/employees"
                 android:textColor="#FFFFFF" />
 
             <RadioButton
-                android:id="@+id/radioButtonEmployees"   android:layout_width="wrap_content"
+                android:id="@+id/radioButtonEmployees"
+                android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:text="@string/teachers"
                 android:textColor="#FFFFFF" />
@@ -56,7 +53,6 @@
                 android:checked="true"
                 android:text="@string/students"
                 android:textColor="#FFFFFF" />
-
         </RadioGroup>
 
         <LinearLayout
@@ -84,7 +80,6 @@
                 android:layout_height="48dp"
                 android:background="#FFFFFF"
                 tools:ignore="SpeakableTextPresentCheck" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -105,10 +100,10 @@
                 android:id="@+id/btnPickYoungerDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Change Date" />
-
-
+                android:text="@string/change_date"
+                tools:ignore="DuplicateSpeakableTextCheck" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -125,13 +120,12 @@
 
             <Button
                 android:id="@+id/btnPickOlderDate"
-                android:layout_marginLeft="18dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Change Date" />
-
-
+                android:layout_marginStart="18dp"
+                android:text="@string/change_date" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -162,10 +156,7 @@
                 android:layout_height="48dp"
                 android:background="#FFFFFF"
                 tools:ignore="SpeakableTextPresentCheck" />
-
-
         </LinearLayout>
-
 
         <Button
             android:id="@+id/btnSearch"
@@ -174,5 +165,4 @@
             android:text="@string/textview_table_search_label"
             tools:ignore="DuplicateSpeakableTextCheck" />
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

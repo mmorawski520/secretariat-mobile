@@ -16,4 +16,5 @@
     <string name="students">students</string>
     <string name="click_me">click me</string>
     <string name="pick_date">Pick Date</string>
+    <string name="change_date">Change Date</string>
 </resources>
