@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         try {
             select = intent.getStringExtra("dbData")
+            Toast.makeText(this,select, Toast.LENGTH_SHORT).show()
             Cursor = db.basicCustomSelect(select.toString())
             if (Cursor.getColumnIndex("groups") != -1) {
                 binding.recyclerView.adapter = getStudents(Cursor)

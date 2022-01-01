@@ -17,7 +17,7 @@ import com.example.secretary_mobile.databinding.ActivityFiltersBinding
 import com.example.secretary_mobile.databinding.ActivityMainBinding
 import java.util.*
 
-class FiltersActivity : AppCompatActivity(){
+class FiltersActivity : AppCompatActivity() {
 
     var curTable = "students";
     var arrayOrderByAscDesc = arrayOf<String>("ASC", "DESC")
@@ -56,13 +56,13 @@ class FiltersActivity : AppCompatActivity(){
         val editTextField = findViewById<EditText>(R.id.editTextSearch)
         val actionBar = supportActionBar
         actionBar!!.hide()
-        btnDataYoungerPicker.setOnClickListener{
-            clickDataPickerYoungerThan( binding.getRoot())
-          /* btnDataYoungerPicker.text=youngerThan*/
+        btnDataYoungerPicker.setOnClickListener {
+            clickDataPickerYoungerThan(binding.getRoot())
+            /* btnDataYoungerPicker.text=youngerThan*/
         }
-        btnDataOlderPicker.setOnClickListener{
-            clickDataPickerOlderThan( binding.getRoot())
-          //  btnDataOlderPicker.text=olderThan
+        btnDataOlderPicker.setOnClickListener {
+            clickDataPickerOlderThan(binding.getRoot())
+            //  btnDataOlderPicker.text=olderThan
         }
         //Adapters
         var adapterOrderByAscDesc =
@@ -95,14 +95,24 @@ class FiltersActivity : AppCompatActivity(){
 
 
         btnSearch.setOnClickListener {
-            if (editTextField.text.toString().trim().isNotEmpty()) {
-                if (spinnerSearchField.selectedItem.toString() != null && spinnerSearchField.selectedItem.toString() != "") {
-                    if ((spinnerOrderByAscDesc.selectedItem.toString() != "" && spinnerOrderByAscDesc.selectedItem.toString() != null) && (spinnerOrderByField.selectedItem.toString() != "" && spinnerOrderByField.selectedItem.toString() != null)) {
-                        select =
-                            "SELECT * FROM " + curTable + " WHERE " + spinnerSearchField.selectedItem.toString() + " LIKE '%" + editTextField.text.toString() + "%' ORDER BY " + spinnerOrderByField.selectedItem.toString() + " " + spinnerOrderByAscDesc.selectedItem.toString();
+
+            if (youngerThan == "" && olderThan == "") {
+                if (editTextField.text.toString().trim().isNotEmpty()) {
+                    if (spinnerSearchField.selectedItem.toString() != null && spinnerSearchField.selectedItem.toString() != "") {
+                        if ((spinnerOrderByAscDesc.selectedItem.toString() != "" && spinnerOrderByAscDesc.selectedItem.toString() != null) && (spinnerOrderByField.selectedItem.toString() != "" && spinnerOrderByField.selectedItem.toString() != null)) {
+                            select =
+                                "SELECT * FROM " + curTable + " WHERE " + spinnerSearchField.selectedItem.toString() + " LIKE '%" + editTextField.text.toString() + "%' ORDER BY " + spinnerOrderByField.selectedItem.toString() + " " + spinnerOrderByAscDesc.selectedItem.toString();
+                        } else {
+                            select =
+                                "SELECT * FROM " + curTable + " WHERE " + spinnerSearchField.selectedItem.toString() + " LIKE '%" + editTextField.text.toString() + "%'";
+                        }
                     } else {
-                        select =
-                            "SELECT * FROM " + curTable + " WHERE " + spinnerSearchField.selectedItem.toString() + " LIKE '%" + editTextField.text.toString() + "%'";
+                        if ((spinnerOrderByAscDesc.selectedItem.toString() != "" && spinnerOrderByAscDesc.selectedItem.toString() != null) && (spinnerOrderByField.selectedItem.toString() != "" && spinnerOrderByField.selectedItem.toString() != null)) {
+                            select =
+                                "SELECT * FROM " + curTable + " ORDER BY " + spinnerOrderByField.selectedItem.toString() + " " + spinnerOrderByAscDesc.selectedItem.toString();
+                        } else {
+                            select = "SELECT * FROM " + curTable;
+                        }
                     }
                 } else {
                     if ((spinnerOrderByAscDesc.selectedItem.toString() != "" && spinnerOrderByAscDesc.selectedItem.toString() != null) && (spinnerOrderByField.selectedItem.toString() != "" && spinnerOrderByField.selectedItem.toString() != null)) {
@@ -112,34 +122,129 @@ class FiltersActivity : AppCompatActivity(){
                         select = "SELECT * FROM " + curTable;
                     }
                 }
-            } else {
-                if ((spinnerOrderByAscDesc.selectedItem.toString() != "" && spinnerOrderByAscDesc.selectedItem.toString() != null) && (spinnerOrderByField.selectedItem.toString() != "" && spinnerOrderByField.selectedItem.toString() != null)) {
-                    select =
-                        "SELECT * FROM " + curTable + " ORDER BY " + spinnerOrderByField.selectedItem.toString() + " " + spinnerOrderByAscDesc.selectedItem.toString();
+
+            }
+            if (youngerThan != "" && olderThan == "") {
+                if (editTextField.text.toString().trim().isNotEmpty()) {
+                    if (spinnerSearchField.selectedItem.toString() != null && spinnerSearchField.selectedItem.toString() != "") {
+                        if ((spinnerOrderByAscDesc.selectedItem.toString() != "" && spinnerOrderByAscDesc.selectedItem.toString() != null) && (spinnerOrderByField.selectedItem.toString() != "" && spinnerOrderByField.selectedItem.toString() != null)) {
+                            select =
+                                "SELECT * FROM " + curTable + " WHERE " + spinnerSearchField.selectedItem.toString() + " LIKE '%" + editTextField.text.toString() + "%' AND substr(birth_date,7,4) || substr(birth_date,4,2) || substr(birh_date,1,2) < substr('"+youngerThan+"',7,4) || substr('"+youngerThan+"',4,2) || substr('"+youngerThan+"',1,2) ORDER BY " + spinnerOrderByField.selectedItem.toString() + " " + spinnerOrderByAscDesc.selectedItem.toString();
+                        } else {
+                            select =
+                                "SELECT * FROM " + curTable + " WHERE " + spinnerSearchField.selectedItem.toString() + " LIKE '%" + editTextField.text.toString() + "%' AND  substr(birth_date,7,4) || substr(birth_date,4,2) || substr(birh_date,1,2) < substr('"+youngerThan+"',7,4) || substr('"+youngerThan+"',4,2) || substr('"+youngerThan+"',1,2) ";
+                        }
+                    } else {
+                        if ((spinnerOrderByAscDesc.selectedItem.toString() != "" && spinnerOrderByAscDesc.selectedItem.toString() != null) && (spinnerOrderByField.selectedItem.toString() != "" && spinnerOrderByField.selectedItem.toString() != null)) {
+                            select =
+                                "SELECT * FROM " + curTable + " WHERE  substr(birth_date,7,4) || substr(birth_date,4,2) || substr(birth_date,1,2) < substr('"+youngerThan+"',7,4) || substr('"+youngerThan+"' ,4,2) || substr('"+youngerThan+"',1,2)  ORDER BY " + spinnerOrderByField.selectedItem.toString() + " " + spinnerOrderByAscDesc.selectedItem.toString();
+                        } else {
+                            select = "SELECT * FROM " + curTable+" WHERE  substr(birth_date,7,4) || substr(birth_date,4,2) || substr(birth_date,1,2) < substr('"+youngerThan+"',7,4) || substr('"+youngerThan+"',4,2) || substr('"+youngerThan+"',1,2) ";
+                        }
+                    }
                 } else {
-                    select = "SELECT * FROM " + curTable;
+                    if ((spinnerOrderByAscDesc.selectedItem.toString() != "" && spinnerOrderByAscDesc.selectedItem.toString() != null) && (spinnerOrderByField.selectedItem.toString() != "" && spinnerOrderByField.selectedItem.toString() != null)) {
+                        select =
+                            "SELECT * FROM " + curTable + " WHERE  substr(birth_date,7,4) || substr(birth_date,4,2) || substr(birth_date,1,2) < substr('"+youngerThan+"',7,4) || substr('"+youngerThan+"',4,2) || substr('"+youngerThan+"',1,2)  ORDER BY " + spinnerOrderByField.selectedItem.toString() + " " + spinnerOrderByAscDesc.selectedItem.toString();
+
+                    } else {
+                        select = "SELECT * FROM " + curTable+" WHERE  substr(birth_date,7,4) || substr(birth_date,4,2) || substr(birth_date,1,2) < substr('"+youngerThan+"',7,4) || substr('"+youngerThan+"',4,2) || substr('"+youngerThan+"',1,2) ";
+                    }
+                }
+            }
+            if (youngerThan == "" && olderThan != "") {
+                if (editTextField.text.toString().trim().isNotEmpty()) {
+                    if (spinnerSearchField.selectedItem.toString() != null && spinnerSearchField.selectedItem.toString() != "") {
+                        if ((spinnerOrderByAscDesc.selectedItem.toString() != "" && spinnerOrderByAscDesc.selectedItem.toString() != null) && (spinnerOrderByField.selectedItem.toString() != "" && spinnerOrderByField.selectedItem.toString() != null)) {
+                            select =
+                                "SELECT * FROM " + curTable + " WHERE " + spinnerSearchField.selectedItem.toString() + " LIKE '%" + editTextField.text.toString() + "%' AND substr(birth_date,7,4) || substr(birth_date,4,2) || substr(birh_date,1,2) > substr('"+olderThan+"',7,4) || substr('"+olderThan+"',4,2) || substr('"+olderThan+"',1,2) ORDER BY " + spinnerOrderByField.selectedItem.toString() + " " + spinnerOrderByAscDesc.selectedItem.toString();
+
+                        } else {
+                            select =
+                                "SELECT * FROM " + curTable + " WHERE " + spinnerSearchField.selectedItem.toString() + " LIKE '%" + editTextField.text.toString() + "%' AND  substr(birth_date,7,4) || substr(birth_date,4,2) || substr(birh_date,1,2) > substr('"+olderThan+"',7,4) || substr('"+olderThan+"',4,2) || substr('"+olderThan+"',1,2) ";
+                        }
+                    } else {
+                        if ((spinnerOrderByAscDesc.selectedItem.toString() != "" && spinnerOrderByAscDesc.selectedItem.toString() != null) && (spinnerOrderByField.selectedItem.toString() != "" && spinnerOrderByField.selectedItem.toString() != null)) {
+                            select =
+                                "SELECT * FROM " + curTable + " WHERE  substr(birth_date,7,4) || substr(birth_date,4,2) || substr(birth_date,1,2) > substr('"+olderThan+"',7,4) || substr('"+olderThan+"' ,4,2) || substr('"+olderThan+"',1,2)  ORDER BY " + spinnerOrderByField.selectedItem.toString() + " " + spinnerOrderByAscDesc.selectedItem.toString();
+                        } else {
+                            select = "SELECT * FROM " + curTable+" WHERE  substr(birth_date,7,4) || substr(birth_date,4,2) || substr(birth_date,1,2) > substr('"+olderThan+"',7,4) || substr('"+olderThan+"',4,2) || substr('"+olderThan+"',1,2) ";
+                        }
+                    }
+                } else {
+                    if ((spinnerOrderByAscDesc.selectedItem.toString() != "" && spinnerOrderByAscDesc.selectedItem.toString() != null) && (spinnerOrderByField.selectedItem.toString() != "" && spinnerOrderByField.selectedItem.toString() != null)) {
+                        select =
+                            "SELECT * FROM " + curTable + " WHERE  substr(birth_date,7,4) || substr(birth_date,4,2) || substr(birth_date,1,2) > substr('"+olderThan+"',7,4) || substr('"+olderThan+"',4,2) || substr('"+olderThan+"',1,2)  ORDER BY " + spinnerOrderByField.selectedItem.toString() + " " + spinnerOrderByAscDesc.selectedItem.toString();
+
+                    } else {
+                        select = "SELECT * FROM " + curTable+" WHERE  substr(birth_date,7,4) || substr(birth_date,4,2) || substr(birth_date,1,2) > substr('"+olderThan+"',7,4) || substr('"+olderThan+"',4,2) || substr('"+olderThan+"',1,2) ";
+                    }
+                }
+            }
+            if (youngerThan != "" && olderThan != "") {
+                if (editTextField.text.toString().trim().isNotEmpty()) {
+                    if (spinnerSearchField.selectedItem.toString() != null && spinnerSearchField.selectedItem.toString() != "") {
+                        if ((spinnerOrderByAscDesc.selectedItem.toString() != "" && spinnerOrderByAscDesc.selectedItem.toString() != null) && (spinnerOrderByField.selectedItem.toString() != "" && spinnerOrderByField.selectedItem.toString() != null)) {
+                            select =
+                                "SELECT * FROM " + curTable + " WHERE " + spinnerSearchField.selectedItem.toString() + " LIKE '%" + editTextField.text.toString() + "%' AND substr(birth_date,7,4) || substr(birth_date,4,2) || substr(birh_date,1,2) > substr('"+olderThan+"',7,4) || substr('"+olderThan+"',4,2) || substr('"+olderThan+"',1,2) ORDER BY " + spinnerOrderByField.selectedItem.toString() + " " + spinnerOrderByAscDesc.selectedItem.toString();
+
+                        } else {
+                            select =
+                                "SELECT * FROM " + curTable + " WHERE " + spinnerSearchField.selectedItem.toString() + " LIKE '%" + editTextField.text.toString() + "%' AND  substr(birth_date,7,4) || substr(birth_date,4,2) || substr(birh_date,1,2) > substr('"+olderThan+"',7,4) || substr('"+olderThan+"',4,2) || substr('"+olderThan+"',1,2) ";
+                        }
+                    } else {
+                        if ((spinnerOrderByAscDesc.selectedItem.toString() != "" && spinnerOrderByAscDesc.selectedItem.toString() != null) && (spinnerOrderByField.selectedItem.toString() != "" && spinnerOrderByField.selectedItem.toString() != null)) {
+                            select =
+                                "SELECT * FROM " + curTable + " WHERE  substr(birth_date,7,4) || substr(birth_date,4,2) || substr(birth_date,1,2) > substr('"+olderThan+"',7,4) || substr('"+olderThan+"' ,4,2) || substr('"+olderThan+"',1,2) AND  substr(birth_date,7,4) || substr(birth_date,4,2) || substr(birh_date,1,2) < substr('"+youngerThan+"',7,4) || substr('"+youngerThan+"',4,2) || substr('"+youngerThan+"',1,2) ORDER BY " + spinnerOrderByField.selectedItem.toString() + " " + spinnerOrderByAscDesc.selectedItem.toString();
+                        } else {
+                            select = "SELECT * FROM " + curTable+" WHERE  substr(birth_date,7,4) || substr(birth_date,4,2) || substr(birth_date,1,2) > substr('"+olderThan+"',7,4) || substr('"+olderThan+"',4,2) || substr('"+olderThan+"',1,2) AND  substr(birth_date,7,4) || substr(birth_date,4,2) || substr(birh_date,1,2) < substr('"+youngerThan+"',7,4) || substr('"+youngerThan+"',4,2) || substr('"+youngerThan+"',1,2)";
+                        }
+                    }
+                } else {
+                    if ((spinnerOrderByAscDesc.selectedItem.toString() != "" && spinnerOrderByAscDesc.selectedItem.toString() != null) && (spinnerOrderByField.selectedItem.toString() != "" && spinnerOrderByField.selectedItem.toString() != null)) {
+                        select =
+                            "SELECT * FROM " + curTable + " WHERE  substr(birth_date,7,4) || substr(birth_date,4,2) || substr(birth_date,1,2) > substr('"+olderThan+"',7,4) || substr('"+olderThan+"',4,2) || substr('"+olderThan+"',1,2) AND  substr(birth_date,7,4) || substr(birth_date,4,2) || substr(birh_date,1,2) < substr('"+youngerThan+"',7,4) || substr('"+youngerThan+"',4,2) || substr('"+youngerThan+"',1,2) ORDER BY " + spinnerOrderByField.selectedItem.toString() + " " + spinnerOrderByAscDesc.selectedItem.toString();
+
+                    } else {
+                        select = "SELECT * FROM " + curTable+" WHERE  substr(birth_date,7,4) || substr(birth_date,4,2) || substr(birth_date,1,2) > substr('"+olderThan+"',7,4) || substr('"+olderThan+"',4,2) || substr('"+olderThan+"',1,2) AND  substr(birth_date,7,4) || substr(birth_date,4,2) || substr(birh_date,1,2) < substr('"+youngerThan+"',7,4) || substr('"+youngerThan+"',4,2) || substr('"+youngerThan+"',1,2) ";
+                    }
                 }
             }
             val intent = Intent(this@FiltersActivity, MainActivity::class.java)
             intent.putExtra("dbData", select)
             startActivity(intent)
         }
+
+
+
+
     }
     @RequiresApi(Build.VERSION_CODES.N)
-     fun clickDataPickerYoungerThan(view: View) {
+    fun clickDataPickerYoungerThan(view: View) {
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
 
 
-        val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            youngerThan="$dayOfMonth.${monthOfYear+1}.$year 00:00:00"
-            Toast.makeText(this,"Selected date $dayOfMonth.${monthOfYear+1}.$year", Toast.LENGTH_SHORT).show()
-            btnDataYoungerPicker.text="$dayOfMonth.${monthOfYear+1}.$year"
-        }, year, month, day)
+        val dpd = DatePickerDialog(
+            this,
+            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                youngerThan = "$dayOfMonth.${monthOfYear + 1}.$year 00:00:00"
+                Toast.makeText(
+                    this,
+                    "Selected date $dayOfMonth.${monthOfYear + 1}.$year",
+                    Toast.LENGTH_SHORT
+                ).show()
+                btnDataYoungerPicker.text = "$dayOfMonth.${monthOfYear + 1}.$year"
+            },
+            year,
+            month,
+            day
+        )
         dpd.show()
     }
+
     fun clickDataPickerOlderThan(view: View) {
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
@@ -147,11 +252,21 @@ class FiltersActivity : AppCompatActivity(){
         val day = c.get(Calendar.DAY_OF_MONTH)
 
 
-        val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            olderThan="$dayOfMonth.${monthOfYear+1}.$year 00:00:00"
-            Toast.makeText(this,"Selected date $dayOfMonth.${monthOfYear+1}.$year", Toast.LENGTH_SHORT).show()
-            btnDataOlderPicker.text="$dayOfMonth.${monthOfYear+1}.$year"
-        }, year, month, day)
+        val dpd = DatePickerDialog(
+            this,
+            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                olderThan = "$dayOfMonth.${monthOfYear + 1}.$year 00:00:00"
+                Toast.makeText(
+                    this,
+                    "Selected date $dayOfMonth.${monthOfYear + 1}.$year",
+                    Toast.LENGTH_SHORT
+                ).show()
+                btnDataOlderPicker.text = "$dayOfMonth.${monthOfYear + 1}.$year"
+            },
+            year,
+            month,
+            day
+        )
         dpd.show()
     }
 }
