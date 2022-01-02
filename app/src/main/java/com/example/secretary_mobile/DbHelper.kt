@@ -77,7 +77,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         values.put("pesel", collumns[8])
         values.put("image_path", collumns[9])
         values.put("gender", collumns[10])
-        values.put("date_of_employment", collumns[11])
+        values.put("date_of_employment","date of employment"+collumns[11])
         values.put("job_description","job desc: "+collumns[12])
         values.put("job_position","job pos: "+collumns[13])
         values.put("tenure","monthly working hours: "+collumns[14])
@@ -88,16 +88,6 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     fun basicCustomSelect(sql: String): Cursor {
         val db = this.readableDatabase
         return db.rawQuery(sql, null)
-    }
-
-    fun selectStudents(): Cursor? {
-        val db = this.readableDatabase
-        return db.rawQuery("SELECT * from students", null)
-    }
-
-    fun deleteStudents() {
-        val db = this.writableDatabase
-        db.rawQuery("DELETE FROM students", null)
     }
 
     val queryCreateStudentsTable = ("CREATE TABLE students (" +

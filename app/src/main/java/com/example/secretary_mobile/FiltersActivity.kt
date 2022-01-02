@@ -31,7 +31,6 @@ class FiltersActivity : AppCompatActivity() {
         "mothers_name",
         "birth_date",
         "pesel",
-        "image_path",
         "gender",
         "current_class",
         "groups"
@@ -75,20 +74,73 @@ class FiltersActivity : AppCompatActivity() {
 
         //initialization of spinners
         spinnerOrderByAscDesc.adapter = adapterOrderByAscDesc
-        spinnerOrderByField.adapter = adapterArrayOfFields
-        spinnerSearchField.adapter = adapterArrayOfFields
 
+        fun refreshSpinners(){
+            adapterArrayOfFields =
+                ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayOfFields)
+            spinnerOrderByField.adapter = adapterArrayOfFields
+            spinnerSearchField.adapter = adapterArrayOfFields
+        }
+        refreshSpinners()
         radioGroup.setOnCheckedChangeListener(
             RadioGroup.OnCheckedChangeListener { group, checkedId ->
                 var radio: RadioButton = findViewById(checkedId)
                 if (radio.text == "students") {
                     curTable = "students"
+                    arrayOfFields = arrayOf<String>(
+                        "id",
+                        "first_name",
+                        "second_name",
+                        "last_name",
+                        "maiden_name",
+                        "fathers_name",
+                        "mothers_name",
+                        "birth_date",
+                        "pesel",
+                        "gender",
+                        "current_class",
+                        "groups"
+                    )
+                    refreshSpinners()
                 }
                 if (radio.text == "employees") {
                     curTable = "employees"
+                    arrayOfFields = arrayOf<String>(
+                        "id",
+                        "first_name",
+                        "second_name",
+                        "last_name",
+                        "maiden_name",
+                        "fathers_name",
+                        "mothers_name",
+                        "birth_date",
+                        "pesel",
+                        "gender",
+                        "date_of_employment",
+                        "job_description",
+                        "job_position",
+                        "tenure"
+                    )
+                    refreshSpinners()
                 }
                 if (radio.text == "teachers") {
                     curTable = "teachers"
+                    arrayOfFields = arrayOf<String>(
+                        "id",
+                        "first_name",
+                        "second_name",
+                        "last_name",
+                        "maiden_name",
+                        "fathers_name",
+                        "mothers_name",
+                        "birth_date",
+                        "pesel",
+                        "gender",
+                        "taught_subjects",
+                        "tutor",
+                        "date_of_employment"
+                    )
+                    refreshSpinners()
                 }
             })
 
@@ -106,6 +158,7 @@ class FiltersActivity : AppCompatActivity() {
             intent.putExtra("dbData", select)
             startActivity(intent)
         }
+
     }
 
     @RequiresApi(Build.VERSION_CODES.N)

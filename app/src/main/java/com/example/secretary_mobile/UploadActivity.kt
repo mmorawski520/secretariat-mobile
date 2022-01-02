@@ -68,14 +68,14 @@ class UploadActivity : AppCompatActivity() {
                         "dbData.txt"
                     )
 
-            Toast.makeText(this, "File is being downlaoded ", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Your file will be downloaded in 3 seconds ", Toast.LENGTH_SHORT).show()
             val dm = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
             dm.enqueue(request)
-            //1 second delay
+            //3 seconds delay
             val handler = Handler(Looper.getMainLooper())
             handler.postDelayed({
                 loadData()
-            }, 1000)
+            }, 3000)
         }
     }
 
