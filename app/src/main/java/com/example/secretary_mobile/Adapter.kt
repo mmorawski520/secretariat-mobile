@@ -27,10 +27,10 @@ class Adapter(private val mList: List<ItemsViewModel>) :
         holder.textViewBirthDateName.text = "birthdate: " + ItemsViewModel.birthDate
         holder.textViewPesel.text = "pesel: " + ItemsViewModel.pesel
         holder.textViewGender.text = "gender: " + ItemsViewModel.gender
-        holder.textViewAdditionalField1.text = ItemsViewModel.additionalField1
-        holder.textViewAdditionalField2.text = ItemsViewModel.additionalField2
-        holder.textViewAdditionalField3.text = ItemsViewModel.additionalField3
-        holder.textViewAdditionalField4.text = ItemsViewModel.additionalField4
+        holder.textViewAdditionalField1.text =ItemsViewModel.additionalField1
+        holder.textViewAdditionalField2.text =ItemsViewModel.additionalField2
+        holder.textViewAdditionalField3.text =ItemsViewModel.additionalField3
+        holder.textViewAdditionalField4.text =ItemsViewModel.additionalField4
 
     }
 
