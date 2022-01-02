@@ -17,7 +17,7 @@ class Adapter(private val mList: List<ItemsViewModel>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val ItemsViewModel = mList[position]
 
-        holder.textViewId.text = "id: " + ItemsViewModel.id
+
         holder.textViewName.text = "name: " + ItemsViewModel.firstName
         holder.textViewSecondName.text = "second name: " + ItemsViewModel.secondName
         holder.textViewLastName.text = "last name: " + ItemsViewModel.lastName

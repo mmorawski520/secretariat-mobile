@@ -70,7 +70,6 @@ class MainActivity : AppCompatActivity() {
                 try {
                     data.add(
                         ItemsViewModel(
-                            selectStudents.getString(selectStudents.getColumnIndex("id")),
                             selectStudents.getString(selectStudents.getColumnIndex("first_name")),
                             selectStudents.getString(selectStudents.getColumnIndex("second_name")),
                             selectStudents.getString(selectStudents.getColumnIndex("last_name")),
@@ -103,8 +102,6 @@ class MainActivity : AppCompatActivity() {
                 try {
                     data.add(
                         ItemsViewModel(
-
-                            selectEmloyees.getString(selectEmloyees.getColumnIndex("id")),
                             selectEmloyees.getString(selectEmloyees.getColumnIndex("first_name")),
                             selectEmloyees.getString(selectEmloyees.getColumnIndex("second_name")),
                             selectEmloyees.getString(selectEmloyees.getColumnIndex("last_name")),
@@ -118,7 +115,7 @@ class MainActivity : AppCompatActivity() {
                             selectEmloyees.getString(selectEmloyees.getColumnIndex("date_of_employment")),
                             selectEmloyees.getString(selectEmloyees.getColumnIndex("job_description")),
                             selectEmloyees.getString(selectEmloyees.getColumnIndex("job_position")),
-                            selectEmloyees.getString(selectEmloyees.getColumnIndex("tenure"))
+                            selectEmloyees.getString(selectEmloyees.getColumnIndex("tenure")),
                         )
                     )
                 } catch (e: Throwable) {
@@ -137,7 +134,6 @@ class MainActivity : AppCompatActivity() {
                 try {
                     data.add(
                         ItemsViewModel(
-                            getTeachers.getString(getTeachers.getColumnIndex("id")),
                             getTeachers.getString(getTeachers.getColumnIndex("first_name")),
                             getTeachers.getString(getTeachers.getColumnIndex("second_name")),
                             getTeachers.getString(getTeachers.getColumnIndex("last_name")),

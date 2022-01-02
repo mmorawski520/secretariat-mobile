@@ -77,9 +77,9 @@ class UploadActivity : AppCompatActivity() {
                 loadData()
             }, 1000)
         }
-
     }
-    fun loadData(){
+
+    fun loadData() {
         var columnCounter = 0
         val externalFile = File(
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
@@ -88,8 +88,8 @@ class UploadActivity : AppCompatActivity() {
 
         val db = DBHelper(this, null)
         if (externalFile.exists()) {
-            val text = externalFile.readText()
 
+            val text = externalFile.readText()
             val lines: List<String> = text.split("\n")
 
             for (line in lines) {
@@ -100,20 +100,16 @@ class UploadActivity : AppCompatActivity() {
                 if (columnCounter == 12) {
                     var collumns: List<String> = line.split(",")
                     db.addStudent(collumns)
-
                 }
                 if (columnCounter == 13) {
                     var collumns: List<String> = line.split(",")
                     db.addTeacher(collumns)
-
                 }
                 if (columnCounter == 14) {
                     var collumns: List<String> = line.split(",")
                     db.addEmployee(collumns)
-
                 }
                 columnCounter = 0
-
             }
             Toast.makeText(this, "Data has been uploaded", Toast.LENGTH_SHORT).show()
         } else {

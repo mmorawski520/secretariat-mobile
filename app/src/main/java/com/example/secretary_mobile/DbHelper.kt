@@ -36,8 +36,8 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         values.put("pesel", collumns[8])
         values.put("image_path", collumns[9])
         values.put("gender", collumns[10])
-        values.put("current_class", collumns[11])
-        values.put("groups", collumns[12])
+        values.put("current_class","class: "+collumns[11])
+        values.put("groups","groups: "+collumns[12])
 
         db.insert("students", null, values)
     }
@@ -56,9 +56,9 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         values.put("pesel", collumns[8])
         values.put("image_path", collumns[9])
         values.put("gender", collumns[10])
-        values.put("class_tutor", collumns[11])
-        values.put("taught_subjects", collumns[12])
-        values.put("date_of_employment", collumns[13])
+        values.put("class_tutor","tutor of class: "+collumns[11])
+        values.put("taught_subjects","taught subjects: "+collumns[12])
+        values.put("date_of_employment","date of employment: "+collumns[13])
 
         db.insert("teachers", null, values)
     }
@@ -78,9 +78,10 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         values.put("image_path", collumns[9])
         values.put("gender", collumns[10])
         values.put("date_of_employment", collumns[11])
-        values.put("job_description", collumns[12])
-        values.put("job_position", collumns[13])
-        values.put("tenure", collumns[14])
+        values.put("job_description","job desc: "+collumns[12])
+        values.put("job_position","job pos: "+collumns[13])
+        values.put("tenure","monthly working hours: "+collumns[14])
+
         db.insert("employees", null, values)
     }
 
